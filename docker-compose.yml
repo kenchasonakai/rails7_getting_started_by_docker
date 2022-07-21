@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: mysql:5.7
-    platform: linux/x86_64
+    platform: linux/amd64
     environment:
       TZ: Asia/Tokyo
       MYSQL_ROOT_PASSWORD: password
@@ -22,10 +22,14 @@ services:
       - node_modules:/sample_blog_rails7/node_modules
     environment:
       TZ: Asia/Tokyo
+      SELENIUM_DRIVER_URL: http://chromium:4444/wd/hub
     ports:
       - "3000:3000"
     depends_on:
       - db
+      - chromium
+  chromium:
+    image: seleniarm/standalone-chromium:latest
 volumes:
   mysql_data:
   bundle_data:
