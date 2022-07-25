@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Articles", type: :system do
-  describe 'Article投稿' do
+  describe 'Article投稿', js: true do
     let(:article) { create(:article) }
     it 'Articleの作成が出来ること' do
 
@@ -9,7 +9,7 @@ RSpec.describe "Articles", type: :system do
       visit '/articles/new'
 
       # 編集リンクの存在確認
-      expect(current_path).to eq('')
+      expect(current_path).to eq(Rails.application.routes.url_helpers.new_article_path)
     end
   end
 end
